@@ -1,0 +1,83 @@
+# Sistema de Gerenciamento de Restaurante
+
+## Descrição
+
+Este projeto implementa um sistema de gerenciamento para um restaurante usando MySQL. O sistema inclui a criação e manipulação de registros para clientes, mesas, pedidos e itens de pedidos, com suporte para exclusão em cascata.
+
+## Estrutura do Banco de Dados
+
+O banco de dados `SistemadeGerenciamentodeRestaurante` contém as seguintes tabelas:
+
+- **clientes**
+  - `id_cliente` (INT, PRIMARY KEY, AUTO_INCREMENT)
+  - `nome` (VARCHAR(100), NOT NULL)
+  - `telefone` (VARCHAR(15))
+  - `email` (VARCHAR(100), UNIQUE, NOT NULL)
+
+- **mesas**
+  - `id_mesa` (INT, PRIMARY KEY, AUTO_INCREMENT)
+  - `numero_mesa` (INT, UNIQUE, NOT NULL)
+  - `capacidade` (INT, NOT NULL)
+
+- **pedidos**
+  - `id_pedido` (INT, PRIMARY KEY, AUTO_INCREMENT)
+  - `id_cliente` (INT, FOREIGN KEY REFERENCES clientes(id_cliente))
+  - `id_mesa` (INT, FOREIGN KEY REFERENCES mesas(id_mesa))
+  - `data_pedido` (DATETIME, NOT NULL)
+  - `total` (DECIMAL(10, 2), NOT NULL)
+
+- **itens_pedido**
+  - `id_item` (INT, PRIMARY KEY, AUTO_INCREMENT)
+  - `id_pedido` (INT, FOREIGN KEY REFERENCES pedidos(id_pedido) ON DELETE CASCADE)
+  - `descricao_item` (VARCHAR(255), NOT NULL)
+  - `quantidade` (INT, NOT NULL)
+  - `preco_total` (DECIMAL(10, 2), NOT NULL)
+
+## Operações
+
+1. **Inserção de Dados:** Adiciona clientes, mesas, pedidos e itens de pedidos.
+2. **Consulta de Dados:** Recupera informações de clientes, mesas, pedidos e itens de pedidos.
+3. **Atualização de Dados:** Modifica registros existentes para clientes e mesas.
+4. **Exclusão de Dados:** Remove pedidos e itens de pedidos associados, com suporte para exclusão em cascata.
+
+## Configuração
+
+Para iniciar, execute os seguintes comandos SQL:
+
+```sql
+CREATE DATABASE SistemadeGerenciamentodeRestaurante;
+
+USE SistemadeGerenciamentodeRestaurante;
+
+-- Criação das tabelas
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE mesas (
+    id_mesa INT PRIMARY KEY AUTO_INCREMENT,
+    numero_mesa INT NOT NULL UNIQUE,
+    capacidade INT NOT NULL
+);
+
+CREATE TABLE pedidos (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT NOT NULL,
+    id_mesa INT NOT NULL,
+    data_pedido DATETIME NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_mesa) REFERENCES mesas(id_mesa)
+);
+
+CREATE TABLE itens_pedido (
+    id_item INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT NOT NULL,
+    descricao_item VARCHAR(255) NOT NULL,
+    quantidade INT NOT NULL,
+    preco_total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE
+);
