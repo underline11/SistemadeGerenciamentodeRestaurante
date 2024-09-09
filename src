@@ -1,0 +1,21 @@
+
+### .gitignore
+
+Para um projeto MySQL, geralmente, você não precisa de um `.gitignore` específico para arquivos de banco de dados, mas aqui está um exemplo para ignorar arquivos temporários e logs:
+
+```plaintext
+# Ignorar arquivos temporários e logs
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Ignorar diretórios de configuração e arquivos específicos do IDE
+/.idea/
+/.vscode/
+/*.sublime-project
+/*.sublime-workspace
+
+# Ignorar backups de banco de dados
+*.sql
+*.sql.gz
