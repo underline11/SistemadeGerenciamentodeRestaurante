@@ -1,0 +1,17 @@
+Projeto: Sistema de Gerenciamento de Restaurante
+
+Descrição:
+Este projeto é um sistema de gerenciamento para um restaurante, desenvolvido utilizando MySQL. O sistema gerencia informações de clientes, mesas, pedidos e itens de pedidos. As funcionalidades principais incluem a criação e manipulação de registros para clientes, mesas, pedidos e itens de pedidos, bem como a configuração de relacionamentos entre essas entidades. O sistema também implementa a exclusão em cascata para garantir a integridade referencial dos dados.
+
+Objetivos:
+
+Criar um banco de dados para gerenciar clientes, mesas, pedidos e itens de pedidos.
+Implementar tabelas com as devidas chaves primárias e estrangeiras.
+Realizar operações de inserção, consulta, atualização e exclusão de dados.
+Garantir que a exclusão de um pedido remova todos os itens associados a ele.
+Estrutura das Tabelas:
+
+clientes: Contém informações sobre os clientes do restaurante.
+mesas: Contém informações sobre as mesas do restaurante.
+pedidos: Contém informações sobre os pedidos feitos pelos clientes.
+itens_pedido: Contém informações sobre os itens em cada pedido.
